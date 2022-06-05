@@ -1,6 +1,6 @@
 {
   "name": "plutonium-installer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Lets you install plutonium games for both personal use and server use",
   "exports": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -10,17 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Stefanuk12/PlutoniumInstall.git"
+    "url": "git+https://github.com/Stefanuk12/PlutoniumInstaller.git"
   },
   "keywords": [],
   "author": "Stefanuk12",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Stefanuk12/PlutoniumInstall/issues"
+    "url": "https://github.com/Stefanuk12/PlutoniumInstaller/issues"
   },
-  "homepage": "https://github.com/Stefanuk12/PlutoniumInstall#readme",
+  "homepage": "https://github.com/Stefanuk12/PlutoniumInstaller#readme",
   "bin": {
-    "plutonium-install": "./lib/index.js"
+    "plutonium-installer": "./lib/index.js"
   },
   "dependencies": {
     "commander": "^9.3.0",
