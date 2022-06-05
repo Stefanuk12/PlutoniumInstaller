@@ -37,7 +37,7 @@ export async function InstallPlutoniumLauncher(Path: string) {
 //
 export const TGameKeys = ["t6", "t5", "t4", "iw5"] as const
 export type TGame = typeof TGameKeys[number]
-export function InstallGame(Game: TGame, Path: string, Verbose: boolean = false, Server: boolean = false) {
+export function InstallGame(Game: TGame, Path: string, Verbose: boolean = false, Server: boolean = false, Force: boolean = false) {
     // Vars
     const TorrentURL = `https://plutonium.pw/pluto_${Game}_full_game.torrent`
     const TorrentClient = new WebTorrent()
@@ -46,6 +46,19 @@ export function InstallGame(Game: TGame, Path: string, Verbose: boolean = false,
     const torrent = TorrentClient.add(TorrentURL, {
         path: Path,
     }, function (torrent_) {
+        // Force
+        if (fs.readdirSync(Path).length != 0){
+            console.log("WARN: install path is not empty")
+
+            if (Force)
+                console.log("WARN: Forcing...")
+            else {
+                console.log("ERROR: stopping install")
+                torrent_.destroy()
+                process.exit(1)
+            }
+        }
+    
         // Make sure is server - for ignoring
         if (Server == false) return
 

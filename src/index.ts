@@ -25,6 +25,7 @@ program
     // Options
     InstallGameCommand.option("-v, --verbose", "Enables verbose mode", false)
     InstallGameCommand.option("-s, --server", "Removes files for server use", false)
+    InstallGameCommand.option("-f, --force", "Forces the install, if install detected", false)
 
     // Main functionality
     InstallGameCommand.action((Game, Options) => {
@@ -35,7 +36,7 @@ program
 
         //
         console.log("Installing...")
-        InstallGame(Game, "./", Options.verbose, Options.server)
+        InstallGame(Game, "./", Options.verbose, Options.server, Options.force)
     })
 }
 
