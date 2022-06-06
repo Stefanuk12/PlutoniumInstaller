@@ -23,12 +23,13 @@ program
     InstallGameCommand.argument("<game>", "the game you want to install. e.g. t6")
 
     // Options
+    InstallGameCommand.option("-p, --path <string>", "Installation path", "./")
     InstallGameCommand.option("-v, --verbose", "Enables verbose mode", false)
     InstallGameCommand.option("-s, --server", "Removes files for server use", false)
     InstallGameCommand.option("-f, --force", "Forces the install, if install detected", false)
 
     // Main functionality
-    InstallGameCommand.action((Game, Options) => {
+    InstallGameCommand.action(async (Game, Options) => {
         // Make sure a valid game is entered
         if (TGameKeys.includes(Game) == false){
             return console.error(`Invalid game. Must be: ${TGameKeys.join(" | ")}`)
@@ -36,7 +37,8 @@ program
 
         //
         console.log("Installing...")
-        InstallGame(Game, "./", Options.verbose, Options.server, Options.force)
+        await InstallGame(Game, Options.path, Options.verbose, Options.server, Options.force)
+        console.log("Installed!")
     })
 }
 
@@ -44,10 +46,13 @@ program
 {
     const InstallLauncher = program.command("install-launcher").description("Install the plutonium launcher")
 
+    // Options
+    InstallLauncher.option("-p, --path <string>", "Installation path", "./")
+
     // Main functionaity
-    InstallLauncher.action(async () => {
+    InstallLauncher.action(async (Options) => {
         console.log("Installing...")
-        await InstallPlutoniumLauncher("./")
+        await InstallPlutoniumLauncher(Options.path)
         console.log("Installed!")
     })
 }
@@ -59,8 +64,11 @@ program
     // Arguments
     InstallConfig.argument("<game>", "the game you want to install. e.g. t6")
 
+    // Options
+    InstallConfig.option("-p, --path <string>", "Installation path", "./")
+
     // Main functionaity
-    InstallConfig.action(async (Game) => {
+    InstallConfig.action(async (Game, Options) => {
         // Make sure a valid game is entered
         if (TGameKeys.includes(Game) == false){
             return console.error(`Invalid game. Must be: ${TGameKeys.join(" | ")}`)
@@ -68,7 +76,7 @@ program
 
         // Install
         console.log("Installing...")
-        await InstallServerConfig(Game, "./")
+        await InstallServerConfig(Game, Options.path)
         console.log("Installed!")
     })
 }
@@ -78,12 +86,13 @@ program
     const Cleanup = program.command("cleanup").description("Cleanup a plutonium install for serveruse")
 
     // Options
+    Cleanup.option("-p, --path <string>", "Installation path", "./")
     Cleanup.option("-v, --verbose", "Enable verbose mode", false)
 
     // Main functionality
     Cleanup.action((Options) => {
         console.log("Cleaning...")
-        CleanupInstall("./", Options.verbose)
+        CleanupInstall(Options.path, Options.verbose)
         console.log("Cleaned!")
     })
 }
