@@ -39,6 +39,7 @@ program
         console.log("Installing...")
         await InstallGame(Game, Options.path, Options.verbose, Options.server, Options.force)
         console.log("Installed!")
+        process.exit(0)
     })
 }
 
@@ -53,7 +54,7 @@ program
     InstallLauncher.action(async (Options) => {
         console.log("Installing...")
         await InstallPlutoniumLauncher(Options.path)
-        console.log("Installed!")
+        console.log("Installed!") 
     })
 }
 

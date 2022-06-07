@@ -43,12 +43,12 @@ export function InstallGame(Game: TGame, Path: string, Verbose: boolean = false,
         if (fs.existsSync(Path) && fs.readdirSync(Path).length != 0){
             if (Verbose) console.warn("WARN: install path is not empty")
 
-            if (Force)
-                if (Verbose) console.warn("WARN: Forcing...")
-            else {
+            if (!Force){
                 if (Verbose) console.error("ERROR: stopping install")
                 return reject(new Error("install path is not empty, stopping install"))
             }
+
+            if (Verbose) console.warn("WARN: Forcing...")
         }
 
         // Vars
