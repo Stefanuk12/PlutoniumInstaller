@@ -49,10 +49,11 @@ export function CleanupInstall(GamePath: string, Verbose: boolean = false) {
         if (!RemoveFolders.includes(dir)) continue
 
         // Remove it
-        fs.rmSync(dir, { recursive: true, force: true })
+        const dirPath = `${GamePath}/${dir}`
+        fs.rmSync(dirPath, { recursive: true, force: true })
 
         // Output
         if (Verbose)
-            console.log(`Deleted: ${dir}`)
+            console.log(`Deleted: ${dirPath}`)
     }
 }
