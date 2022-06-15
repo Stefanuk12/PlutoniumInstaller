@@ -141,3 +141,23 @@ export function InstallGame(Game: TGame, Path: string, Verbose: boolean = false,
         })
     })
 }
+
+//
+export async function InstallIW4MAdmin(Path: string){
+    // Getting latest release
+    const Response: any = await got("https://api.github.com/repos/RaidMax/IW4M-Admin/releases/latest").json()
+    const LatestURL = Response.assets[0].browser_download_url
+
+    // Downloading the file
+    const File = (await got(LatestURL)).rawBody
+    const FileName = "IW4MAdmin.zip"
+    fs.writeFileSync(FileName, File)
+
+    // Unzipping it from the main folder
+    const zip = new StreamZip.async({ file: FileName })
+    await zip.extract(null, Path)
+    await zip.close()
+
+    // Removing zip file
+    fs.unlinkSync(FileName)
+}
