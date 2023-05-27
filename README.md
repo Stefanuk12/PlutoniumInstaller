@@ -1,6 +1,8 @@
 # Plutonium Installer
 Install plutonium with ease!
 
+NOTE: For an updated rust-based version, please visit [this](https://github.com/Stefanuk12/PlutoniumManager) repo.
+
 ## Usage
 ```
 Usage: plutonium-installer [options] [command]
